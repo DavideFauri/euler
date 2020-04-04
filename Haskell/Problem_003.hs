@@ -2,8 +2,10 @@ import           Euler
 
 
 factors :: Integer -> [Integer]
-factors n = filter (\p -> n `mod` p == 0) $ takeWhile (<= limit) primes
-  where limit = floor . sqrt . fromIntegral $ n
+factors 0 = []
+factors 1 = []
+factors n = f : factors (n `div` f)
+  where f = head $ filter (\p -> n `mod` p == 0) primes
 
 
-solution = last . factors $ 600851475143
+solution = last $ factors $ 600851475143
