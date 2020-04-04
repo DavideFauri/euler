@@ -1,5 +1,5 @@
 # Add all the natural numbers below one thousand that are multiples of 3 or 5.
-from euler.euler import lcm
+from euler import lcm
 
 
 def sum_of_multiples_under(base, limit):
