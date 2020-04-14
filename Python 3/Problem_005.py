@@ -6,7 +6,7 @@ def divisible_by_all(N):
     result = 1
     for n in range(1, N + 1):
         result = lcm(result, n)
-    return result
+    return int(result)
 
 
 print(divisible_by_all(20))

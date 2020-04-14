@@ -8,7 +8,7 @@ def sum_of_multiples_under(base, limit):
 
 
 def fizzbuzz(a, b, limit):
-    return (
+    return int(
         sum_of_multiples_under(a, limit)
         + sum_of_multiples_under(b, limit)
         - sum_of_multiples_under(lcm(a, b), limit)

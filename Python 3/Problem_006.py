@@ -2,7 +2,7 @@
 
 
 def difference(N):
-    return abs(sum_of_squares(N) - square_of_sum(N))
+    return int(abs(sum_of_squares(N) - square_of_sum(N)))
 
 
 def sum_of_squares(N):
