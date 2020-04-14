@@ -7,4 +7,6 @@ sumEvenFibsUnder limit = sum $ takeWhile (< limit) $ filter isEven fibs
   where isEven = (\x -> x `mod` 2 == 0)
 
 
-solution = sumEvenFibsUnder 4000000
+main :: IO ()
+main = do
+  print $ sumEvenFibsUnder 4000000

@@ -5,4 +5,6 @@ difference n = abs $ sumOfSquares n - squareOfSum n
   squareOfSum n = ((n + 1) * n `div` 2) ^ 2
 
 
-solution = difference 100
+main :: IO ()
+main = do
+  print $ difference 100

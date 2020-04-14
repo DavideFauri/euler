@@ -8,4 +8,6 @@ factors n = f : factors (n `div` f)
   where f = head $ filter (\p -> n `mod` p == 0) primes
 
 
-solution = last $ factors $ 600851475143
+main :: IO ()
+main = do
+  print $ last $ factors $ 600851475143

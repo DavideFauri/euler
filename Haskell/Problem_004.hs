@@ -35,4 +35,6 @@ generatePalindromesOfLength length
     minBase = 10 ^ (digits - 1)
 
 
-solution = largestPalindrome 3
+main :: IO ()
+main = do
+  print $ largestPalindrome 3

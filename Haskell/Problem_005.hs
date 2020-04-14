@@ -1,5 +1,7 @@
 divisibleByAll :: Integer -> Integer
-divisibleByAll N = foldl lcm 1 [1 .. N]
+divisibleByAll n = foldl lcm 1 [1 .. n]
 
 
-solution = divisibleByAll 20
+main :: IO ()
+main = do
+  print $ divisibleByAll 20

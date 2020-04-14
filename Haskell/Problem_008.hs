@@ -1,4 +1,5 @@
 import           Data.List.Split                ( splitOn )
+import           System.IO
 
 
 largeNumber :: String
@@ -22,5 +23,17 @@ makeStreaks len str =
   in  map (take len) $ map (\shift -> drop shift str) shiftAmounts
 
 
-solution = greatestProductOfLength 13 largeNumber
+main :: IO ()
+-- main = do
+--   largeNumber <- getContents
+--   print $ greatestProductOfLength 13 largeNumber
 
+main = do
+  withFile
+    "../data/data_008.txt"
+    ReadMode
+    (\h -> do
+      fileContents <- hGetContents h
+      let largeNumber = head . lines $ fileContents
+      print $ greatestProductOfLength 13 largeNumber
+    )

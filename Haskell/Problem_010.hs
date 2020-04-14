@@ -5,4 +5,6 @@ sumPrimesBelow :: Integer -> Integer
 sumPrimesBelow limit = sum $ takeWhile (< limit) primes
 
 
-solution = sumPrimesBelow 2000000
+main :: IO ()
+main = do
+  print $ sumPrimesBelow 2000000

@@ -20,4 +20,6 @@ productTriplets :: [(Integer, Integer, Integer)] -> [Integer]
 productTriplets xs = map (\(a, b, c) -> a * b * c) xs
 
 
-solution = productTriplets $ triangleTripletsWithSum 1000
+main :: IO ()
+main = do
+  print $ productTriplets $ triangleTripletsWithSum 1000

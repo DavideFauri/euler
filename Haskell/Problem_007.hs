@@ -5,4 +5,6 @@ nthPrime :: Int -> Integer
 nthPrime n = primes !! (n - 1)
 
 
-solution = nthPrime 10001
+main :: IO ()
+main = do
+  print $ nthPrime 10001
