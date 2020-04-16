@@ -49,3 +49,11 @@ def primes():
             while x in D or (x % 30) not in MODULOS:
                 x += 2 * p
             D[x] = p
+
+
+def factorize(n):
+    if n == 1:
+        return []
+    for p in primes():
+        if n % p == 0:
+            return [p] + factorize(n / p)

@@ -1,11 +1,11 @@
 module Euler
   ( primes
+  , factorize
   )
 where
 
 
 -- primes generation
-
 primes :: [Integer]
 primes = 2 : 3 : ((spin wheel23 5) `minus` composites)
  where
@@ -21,3 +21,10 @@ primes = 2 : 3 : ((spin wheel23 5) `minus` composites)
     merge' (x : xs) (y : ys) | x < y  = x : merge' xs (y : ys)
                              | x == y = x : merge' xs ys
                              | x > y  = y : merge' (x : xs) ys
+
+
+-- factorization
+factorize :: Integer -> [Integer]
+factorize 1 = []
+factorize n = divisor : factorize (n `div` divisor)
+  where divisor = head $ filter (\p -> n `mod` p == 0) primes
