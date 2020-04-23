@@ -1,3 +1,4 @@
+-- What is the value of the first triangle number to have over five hundred divisors?
 import           System.IO
 import           Euler                          ( factorize )
 import           Data.List                      ( group )

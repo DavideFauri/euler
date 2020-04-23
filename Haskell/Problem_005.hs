@@ -1,5 +1,8 @@
+-- What is the smallest number that is evenly divisible by all of the numbers from 1 to 20?
+
+
 divisibleByAll :: Integer -> Integer
-divisibleByAll n = foldl lcm 1 [1 .. n]
+divisibleByAll n = foldr1 lcm [1 .. n]
 
 
 main :: IO ()

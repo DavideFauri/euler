@@ -1,4 +1,9 @@
+-- Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
 import           System.IO
+
+
+parseNumbers :: String -> [Integer]
+parseNumbers rawString = map read $ lines rawString
 
 
 firstNDigits :: Int -> Integer -> Integer
@@ -13,6 +18,6 @@ main = do
     ReadMode
     (\h -> do
       fileContents <- hGetContents h
-      let largeNumbers = [ read line :: Integer | line <- lines fileContents ]
+      let largeNumbers = parseNumbers fileContents
       print $ firstNDigits 10 $ sum largeNumbers
     )

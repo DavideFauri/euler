@@ -1,3 +1,6 @@
+-- Find the largest palindrome made from the product of two 3-digit numbers.
+
+
 largestPalindrome :: Integer -> Integer
 largestPalindrome n =
   head
@@ -24,8 +27,8 @@ numbersOfLength digits = [maxNumber, maxNumber - 1 .. minNumber]
 
 generatePalindromesOfLength :: Integer -> [Integer]
 generatePalindromesOfLength length
-  | length `mod` 2 == 0 = map palyndromizeEven $ bases (length `div` 2)
-  | otherwise           = map palyndromizeOdd $ bases (length `div` 2 + 1)
+  | even length = map palyndromizeEven $ bases (length `div` 2)
+  | otherwise   = map palyndromizeOdd $ bases (length `div` 2 + 1)
  where
   palyndromizeEven n = read $ (show n) ++ (reverse $ show n)
   palyndromizeOdd n = read $ (show n) ++ (tail $ reverse $ show n)

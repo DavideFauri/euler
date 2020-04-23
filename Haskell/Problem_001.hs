@@ -1,10 +1,10 @@
-import           Data.List
+-- Add all the natural numbers below one thousand that are multiples of 3 or 5.
+import           Data.List                      ( union )
 
 
 sumFizzBuzz :: Integer -> Integer -> Integer -> Integer
-sumFizzBuzz a b limit = sum $ nub $ firstMultiples ++ secondMultiples where
-  firstMultiples  = [1 * a, 2 * a .. limit - 1]
-  secondMultiples = [1 * b, 2 * b .. limit - 1]
+sumFizzBuzz a b limit = sum $ union (multiplesOf a) (multiplesOf b)
+  where multiplesOf n = takeWhile (< limit) $ map (n *) [1 ..]
 
 
 main :: IO ()

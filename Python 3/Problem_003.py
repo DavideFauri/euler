@@ -1,6 +1,4 @@
 # Find the largest prime factor of a composite number.
-# coding: utf-8
-
 from math import sqrt, floor
 from euler import primes
 

@@ -1,3 +1,6 @@
+-- There exists exactly one Pythagorean triplet for which a + b + c = 1000. Find the product abc.
+
+
 isPythagoreanTriplet :: (Integer, Integer, Integer) -> Bool
 isPythagoreanTriplet (a, b, c) = a ^ 2 + b ^ 2 == c ^ 2
 
@@ -13,7 +16,11 @@ triangleTripletsWithSum n =
 
 tripletsWithSum :: Integer -> [(Integer, Integer, Integer)]
 tripletsWithSum n =
-  [ (a, b, n - a - b) | a <- [0 .. n `div` 2 + 1], b <- [0 .. n `div` 2] ]
+  [ (a, b, c)
+  | a <- [0 .. n `div` 2 + 1]
+  , b <- [0 .. n `div` 2]
+  , let c = n - a - b
+  ]
 
 
 productTriplets :: [(Integer, Integer, Integer)] -> [Integer]
@@ -22,4 +29,4 @@ productTriplets xs = map (\(a, b, c) -> a * b * c) xs
 
 main :: IO ()
 main = do
-  print $ productTriplets $ triangleTripletsWithSum 1000
+  print . head . productTriplets . triangleTripletsWithSum $ 1000

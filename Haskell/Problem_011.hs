@@ -1,53 +1,36 @@
--- What is the greatest product of four adjacent lenSliceumbers in the same direction?
+-- What is the greatest product of four adjacent numbers in any direction in the 20x20 grid?
 import           System.IO
-import           Data.List                      ( transpose )
+import           Data.Array
 
 
-parseGrid :: String -> [[Int]]
-parseGrid rawString = map toListOfNumbers $ lines rawString
-  where toListOfNumbers line = [ read word :: Int | word <- words line ]
+parseGrid :: String -> Array (Int, Int) Int
+parseGrid rawString = listArray ((1, 1), (nrows, ncols)) elements
+ where
+  elements    = map read $ concat rawElements
+  rawElements = map words $ lines rawString
+  nrows       = length rawElements
+  ncols       = length $ head rawElements
 
 
-greatestProduct :: [[Int]] -> Int -> Int
-greatestProduct grid lenSlice = maximum $ concat
-  [ horizProducts grid lenSlice
-  , vertProducts grid lenSlice
-  , diagLProducts grid lenSlice
-  , diagRProducts grid lenSlice
-  ]
+greatestProduct :: Array (Int, Int) Int -> Int -> Int
+greatestProduct grid lenSlice = maximum $ map product allSlices
+ where
+  allSlices = concat $ map takeSlicesInDirection directions
+  takeSlicesInDirection d = takeSlices grid d lenSlice
+  directions = [(1, 0), (0, 1), (1, 1), (1, -1)]
 
 
-horizProducts :: [[Int]] -> Int -> [Int]
-horizProducts grid lenSlice =
-  let takeSlices lenSlice row =
-          [ take lenSlice $ drop shift row
-          | shift <- [0 .. (length row - lenSlice)]
-          ]
-      rowProducts row = [ product slice | slice <- takeSlices lenSlice row ]
-  in  concat [ rowProducts row | row <- grid ]
-
-
-vertProducts :: [[Int]] -> Int -> [Int]
-vertProducts grid lenSlice = horizProducts transposedGrid lenSlice
-  where transposedGrid = transpose grid
-
-
-diagLProducts :: [[Int]] -> Int -> [Int]
-diagLProducts grid lenSlice =
-  let pointAt (row, column) = grid !! row !! column
-      takeSlice lenSlice (r, c) =
-          [ pointAt (r + shift, c + shift) | shift <- [0 .. lenSlice - 1] ]
-      takeSlices =
-          [ takeSlice lenSlice (r, c)
-          | r <- [0 .. length grid - lenSlice]
-          , c <- [0 .. length (grid !! r) - lenSlice]
-          ]
-  in  [ product slice | slice <- takeSlices ]
-
-
-diagRProducts :: [[Int]] -> Int -> [Int]
-diagRProducts grid lenSlice = diagLProducts flippedGrid lenSlice
-  where flippedGrid = map reverse grid
+takeSlices :: Array (Int, Int) Int -> (Int, Int) -> Int -> [[Int]]
+takeSlices grid (incr_row, incr_col) lenSlice = slices where
+  slices      = map takeSlice startPoints
+  startPoints = indices grid
+  takeSlice (r0, c0) =
+    [ grid ! (r, c)
+    | n <- [0 .. lenSlice - 1]
+    , let r = r0 + incr_row * n
+    , let c = c0 + incr_col * n
+    , inRange (bounds grid) (r, c)
+    ]
 
 
 main :: IO ()
