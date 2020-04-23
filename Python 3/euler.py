@@ -57,3 +57,8 @@ def factorize(n):
     for p in primes():
         if n % p == 0:
             return [p] + factorize(n / p)
+
+
+def progress_bar(n, step=10000):
+    if n % 10000 == 0:
+        print(".", end="", flush=True)
