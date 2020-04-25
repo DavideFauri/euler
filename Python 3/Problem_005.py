@@ -9,4 +9,5 @@ def divisible_by_all(N):
     return int(result)
 
 
-print(divisible_by_all(20))
+if __name__ == "__main__":
+    print(divisible_by_all(20))

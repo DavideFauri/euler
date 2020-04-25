@@ -14,4 +14,5 @@ def max_factor(N):
             return max_factor
 
 
-print(max_factor(600851475143))
+if __name__ == "__main__":
+    print(max_factor(600851475143))

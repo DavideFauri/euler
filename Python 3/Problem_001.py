@@ -15,4 +15,5 @@ def fizzbuzz(a, b, limit):
     )
 
 
-print(fizzbuzz(3, 5, 1000))
+if __name__ == "__main__":
+    print(fizzbuzz(3, 5, 1000))

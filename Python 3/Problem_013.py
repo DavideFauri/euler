@@ -2,9 +2,10 @@
 from pathlib import Path
 
 
-datapath = Path.cwd() / "data/data_013.txt"
-with open(datapath, "r") as datafile:
-    NUMBERS = [int(line) for line in datafile.readlines()]
+if __name__ == "__main__":
+    datapath = Path.cwd() / "data/data_013.txt"
+    with open(datapath, "r") as datafile:
+        NUMBERS = [int(line) for line in datafile.readlines()]
 
 
 def first_N_digits(number, N):
@@ -12,4 +13,5 @@ def first_N_digits(number, N):
     return str_number[0 : min(N, len(str_number))]
 
 
-print(first_N_digits(sum(NUMBERS), 10))
+if __name__ == "__main__":
+    print(first_N_digits(sum(NUMBERS), 10))

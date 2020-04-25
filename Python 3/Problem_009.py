@@ -17,4 +17,5 @@ def find_triplets_with_sum(N):
                 yield (a, b, c)
 
 
-print([a * b * c for (a, b, c) in find_triplets_with_sum(1000)])
+if __name__ == "__main__":
+    print([a * b * c for (a, b, c) in find_triplets_with_sum(1000)])

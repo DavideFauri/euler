@@ -51,4 +51,5 @@ def _both_divisors_have_n_digits(palyndrome, divisorDigits):
     return False
 
 
-print(largest_palyndrome(3))
+if __name__ == "__main__":
+    print(largest_palyndrome(3))

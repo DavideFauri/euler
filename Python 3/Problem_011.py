@@ -2,12 +2,13 @@
 from pathlib import Path
 
 
-datapath = Path.cwd() / "data/data_011.txt"
-with open(datapath, "r") as datafile:
-    lines = datafile.readlines()
-    text_grid = [line.strip().split(" ") for line in lines]
-    assert max(len(row) for row in text_grid) == min(len(row) for row in text_grid)
-    GRID = [[int(n) for n in row] for row in text_grid]
+if __name__ == "__main__":
+    datapath = Path.cwd() / "data/data_011.txt"
+    with open(datapath, "r") as datafile:
+        lines = datafile.readlines()
+        text_grid = [line.strip().split(" ") for line in lines]
+        assert max(len(row) for row in text_grid) == min(len(row) for row in text_grid)
+        GRID = [[int(n) for n in row] for row in text_grid]
 
 
 def grid_size(grid):
@@ -85,4 +86,5 @@ def max_productory(grid, len_pattern):
     )
 
 
-print(max_productory(GRID, 4))
+if __name__ == "__main__":
+    print(max_productory(GRID, 4))

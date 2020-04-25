@@ -13,4 +13,5 @@ def square_of_sum(N):
     return ((N + 1) * N / 2) ** 2
 
 
-print(difference(100))
+if __name__ == "__main__":
+    print(difference(100))

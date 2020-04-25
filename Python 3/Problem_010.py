@@ -10,4 +10,5 @@ def sumPrimesBelow(N):
         acc += p
 
 
-print(sumPrimesBelow(2000000))
+if __name__ == "__main__":
+    print(sumPrimesBelow(2000000))

@@ -26,4 +26,5 @@ def triangle_with_n_divisors(limit):
             return t
 
 
-print(triangle_with_n_divisors(500))
+if __name__ == "__main__":
+    print(triangle_with_n_divisors(500))

@@ -11,4 +11,5 @@ def evenFibonacciUnder(limit):
         past, present = present, future
 
 
-print(sum(i for i in evenFibonacciUnder(4000000)))
+if __name__ == "__main__":
+    print(sum(i for i in evenFibonacciUnder(4000000)))

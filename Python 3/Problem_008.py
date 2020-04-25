@@ -2,9 +2,10 @@
 from pathlib import Path
 
 
-datapath = Path.cwd() / "data/data_008.txt"
-with open(datapath, "r") as datafile:
-    NUMBER = datafile.readline()
+if __name__ == "__main__":
+    datapath = Path.cwd() / "data/data_008.txt"
+    with open(datapath, "r") as datafile:
+        NUMBER = datafile.readline()
 
 
 def greatest_product_of_length(number_str, length):
@@ -26,4 +27,5 @@ def greatest_product_of_length(number_str, length):
     return largest_product
 
 
-print(greatest_product_of_length(NUMBER, 13))
+if __name__ == "__main__":
+    print(greatest_product_of_length(NUMBER, 13))

@@ -29,4 +29,5 @@ def longest_Collatz_under(limit):
     return longest_Collatz[0]
 
 
-print(longest_Collatz_under(1000000))
+if __name__ == "__main__":
+    print(longest_Collatz_under(1000000))
