@@ -1,6 +1,7 @@
 module Euler
   ( primes
   , factorize
+  , divisors
   )
 where
 
@@ -28,3 +29,10 @@ factorize :: Integer -> [Integer]
 factorize 1 = []
 factorize n = divisor : factorize (n `div` divisor)
   where divisor = head $ filter (\p -> n `mod` p == 0) primes
+
+
+-- divisors of a number
+divisors :: Integer -> [Integer]
+divisors n =
+  let bound = floor . sqrt . fromInteger $ n
+  in  foldl (++) [1] [ [d, n `div` d] | d <- [2 .. bound], n `mod` d == 0 ]

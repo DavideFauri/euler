@@ -1,4 +1,5 @@
 import itertools as it
+from math import floor, sqrt
 
 
 # least common multiple
@@ -57,6 +58,15 @@ def factorize(n):
     for p in primes():
         if n % p == 0:
             return [p] + factorize(n / p)
+
+
+def divisors(n):
+    div = [1]
+    for d in range(2, floor(sqrt(n))):
+        if n % d == 0:
+            div.append(d)
+            div.append(n // d)
+    return div
 
 
 def progress_bar(n, step=10000):
