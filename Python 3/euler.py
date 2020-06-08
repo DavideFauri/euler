@@ -1,5 +1,5 @@
 import itertools as it
-from math import floor, sqrt
+from math import ceil, sqrt
 
 
 # least common multiple
@@ -61,14 +61,18 @@ def factorize(n):
 
 
 def divisors(n):
-    div = [1]
-    for d in range(2, floor(sqrt(n))):
+    assert n > 0, f"Number {n} is not positive!"
+    assert int(n) == n, f"Number {n} is not an integer!"
+    div = {1}
+    if n in (1, 2):  # special cases
+        return div
+    for d in range(2, 1 + ceil(sqrt(n))):
         if n % d == 0:
-            div.append(d)
-            div.append(n // d)
+            div.add(d)
+            div.add(n // d)
     return div
 
 
 def progress_bar(n, step=10000):
-    if n % 10000 == 0:
+    if n % step == 0:
         print(".", end="", flush=True)

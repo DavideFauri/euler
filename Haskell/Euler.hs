@@ -4,6 +4,7 @@ module Euler
   , divisors
   )
 where
+import           Data.List                      ( nub )
 
 
 -- primes generation
@@ -27,7 +28,7 @@ primes = 2 : 3 : ((spin wheel23 5) `minus` composites)
 -- factorization
 factorize :: Integer -> [Integer]
 factorize 1 = []
-factorize n = divisor : factorize (n `div` divisor)
+factorize n = divisor : factorize (n `quot` divisor)
   where divisor = head $ filter (\p -> n `mod` p == 0) primes
 
 
@@ -35,4 +36,6 @@ factorize n = divisor : factorize (n `div` divisor)
 divisors :: Integer -> [Integer]
 divisors n =
   let bound = floor . sqrt . fromInteger $ n
-  in  foldl (++) [1] [ [d, n `div` d] | d <- [2 .. bound], n `mod` d == 0 ]
+  in  nub $ foldl (++)
+                  [1]
+                  [ [d, n `quot` d] | d <- [2 .. bound], n `mod` d == 0 ]
