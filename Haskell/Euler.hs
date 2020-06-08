@@ -1,10 +1,17 @@
 module Euler
-  ( primes
+  ( factorial
+  , primes
   , factorize
   , divisors
   )
 where
 import           Data.List                      ( nub )
+
+
+-- factorial
+factorial :: Integer -> Integer
+factorial 1 = 1
+factorial n = n * factorial (n - 1)
 
 
 -- primes generation
