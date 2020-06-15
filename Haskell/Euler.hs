@@ -1,11 +1,17 @@
 module Euler
-  ( factorial
+  ( fibonacci
+  , factorial
   , primes
   , factorize
   , divisors
   )
 where
 import           Data.List                      ( nub )
+
+
+-- canonical implementation of Fibonacci
+fibonacci :: [Integer]
+fibonacci = 0 : 1 : zipWith (+) fibonacci (tail fibonacci)
 
 
 -- factorial

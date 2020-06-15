@@ -73,6 +73,14 @@ def divisors(n):
     return div
 
 
+def fibonacci():
+    a = 1
+    b = 1
+    while True:
+        yield a
+        a, b = b, a + b
+
+
 def progress_bar(n, step=10000):
     if n % step == 0:
         print(".", end="", flush=True)
