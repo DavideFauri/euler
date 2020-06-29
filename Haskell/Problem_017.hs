@@ -86,5 +86,4 @@ countLettersRange list = sum $ map (length . num2str) list
 
 main :: IO ()
 main = do
---   print $ map num2str [100 .. 121]
   print $ countLettersRange [1 .. 1000]

@@ -3,26 +3,30 @@ import           System.IO
 import           Data.Array
 
 
-parseGrid :: String -> Array (Int, Int) Int
+type Grid = Array (Int, Int) Int
+type Slice = [Int]
+type Length = Int
+
+
+parseGrid :: String -> Grid
 parseGrid rawString = listArray ((1, 1), (nrows, ncols)) elements
  where
-  elements    = map read $ concat rawElements
-  rawElements = map words $ lines rawString
   nrows       = length rawElements
-  ncols       = length $ head rawElements
+  ncols       = length . head $ rawElements
+  elements    = map read . concat $ rawElements
+  rawElements = map words . lines $ rawString
 
 
-greatestProduct :: Array (Int, Int) Int -> Int -> Int
+greatestProduct :: Grid -> Length -> Int
 greatestProduct grid lenSlice = maximum $ map product allSlices
  where
-  allSlices = concat $ map takeSlicesInDirection directions
-  takeSlicesInDirection d = takeSlices grid d lenSlice
+  allSlices  = concat [ takeSlices grid lenSlice d | d <- directions ]
   directions = [(1, 0), (0, 1), (1, 1), (1, -1)]
 
 
-takeSlices :: Array (Int, Int) Int -> (Int, Int) -> Int -> [[Int]]
-takeSlices grid (incr_row, incr_col) lenSlice = slices where
-  slices      = map takeSlice startPoints
+takeSlices :: Grid -> Length -> (Int, Int) -> [Slice]
+takeSlices grid lenSlice (incr_row, incr_col) = map takeSlice startPoints
+ where
   startPoints = indices grid
   takeSlice (r0, c0) =
     [ grid ! (r, c)

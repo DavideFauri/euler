@@ -5,17 +5,18 @@ import           Data.Char                      ( digitToInt )
 
 greatestProductOfLength :: Int -> String -> Int
 greatestProductOfLength len numstr =
-  maximum $ map productString $ makeStreaks len numstr
+  maximum . map productString $ makeStreaks len numstr
 
 
 productString :: String -> Int
-productString numstr = product $ map digitToInt numstr
+productString = product . map digitToInt
 
 
-makeStreaks :: Int -> String -> [String]
-makeStreaks len str =
-  let shiftAmounts = [0 .. (length str) - len]
-  in  map (take len) $ map (\shift -> drop shift str) shiftAmounts
+makeStreaks :: Int -> [a] -> [[a]]
+makeStreaks len = filter isActuallyLen . map (take len) . sequentialDrop
+ where
+  isActuallyLen xs = length xs == len
+  sequentialDrop xs = [ drop n xs | n <- [0 .. (length xs) - len] ]
 
 
 main :: IO ()

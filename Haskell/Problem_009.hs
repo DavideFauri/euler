@@ -1,4 +1,5 @@
 -- There exists exactly one Pythagorean triplet for which a + b + c = 1000. Find the product abc.
+import           Data.SBV -- SMT (Satisfiability Modulo Theories) Based Verification solver (default solver is Z3, is additional dependency)
 
 
 isPythagoreanTriplet :: (Integer, Integer, Integer) -> Bool
@@ -30,3 +31,22 @@ productTriplets xs = map (\(a, b, c) -> a * b * c) xs
 main :: IO ()
 main = do
   print . head . productTriplets . triangleTripletsWithSum $ 1000
+
+  sbvSolution <- solution 1000
+  case
+      ( getModelValue "a" sbvSolution :: Maybe Integer
+      , getModelValue "b" sbvSolution :: Maybe Integer
+      , getModelValue "c" sbvSolution :: Maybe Integer
+      )
+    of -- maybe since the solver might not find a solution
+      (Just a, Just b, Just c) -> print $ a * b * c
+      _                        -> putStrLn "Whoops, no solution here"
+
+
+solution sumTriplet = sat $ do
+  a <- sInteger "a" -- symbolic integer
+  b <- sInteger "b" -- symbolic integer
+  c <- sInteger "c" -- symbolic integer
+  constrain $ 0 .< a .&& a .<= b .&& b .<= c -- symbolic operators are prepended with a dot
+  constrain $ a * a + b * b .== c * c -- sbv library provides implementation of Num class for symbolic, so some numerical operators do not need plus
+  constrain $ a + b + c .== sumTriplet

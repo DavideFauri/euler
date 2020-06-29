@@ -3,12 +3,11 @@ import           System.IO
 
 
 parseNumbers :: String -> [Integer]
-parseNumbers rawString = map read $ lines rawString
+parseNumbers = map read . lines
 
 
 firstNDigits :: Int -> Integer -> Integer
-firstNDigits n number =
-  let shortStr = take n $ show number in read shortStr :: Integer
+firstNDigits n = read . take n . show
 
 
 main :: IO ()

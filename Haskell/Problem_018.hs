@@ -3,18 +3,22 @@ import           System.IO
 import           Data.List                      ( foldl1' )
 
 
-readTriangleRow :: String -> [Int]
-readTriangleRow line = map read $ words line
+type Row = [Int]
 
 
-reduceUpwards :: [Int] -> [Int] -> [Int]
-reduceUpwards downRow topRow = updatedTopRow where
-  updatedTopRow = map collapseUp [0 .. (length topRow) - 1]
-  collapseUp ix = (topRow !! ix) + max (downRow !! ix) (downRow !! (ix + 1))
+readTriangleRow :: String -> Row
+readTriangleRow = map read . words
 
 
-reduceTriangle :: [[Int]] -> [Int]
-reduceTriangle t = foldl1' reduceUpwards $ reverse t
+reduceUpwards :: Row -> Row -> Row
+reduceUpwards bottomR topR = updatedTopR
+ where
+  updatedTopR        = zipWith (+) topR pairwiseMaxBottomR
+  pairwiseMaxBottomR = zipWith max bottomR (tail bottomR)
+
+
+reduceTriangle :: [Row] -> Row
+reduceTriangle = foldl1' reduceUpwards . reverse
 
 
 main :: IO ()

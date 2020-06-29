@@ -1,6 +1,6 @@
 -- How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
-import           System.IO
 import           Data.List                      ( foldl' )
+import qualified Data.Time                     as Time
 
 
 data DayOfWeek = Sunday | Monday | Tuesday | Wednesday | Thursday | Friday | Saturday deriving (Eq, Ord, Enum, Show)
@@ -62,6 +62,20 @@ countDays day startY endY | startY < epochYear = Nothing
     daysInYear y = sum [ snd m | m <- monthsOfYear y ]
 
 
+-- *** *** Doing it with Data.Time *** ***
+
+countDays' :: Time.DayOfWeek -> Int -> Int -> Int
+countDays' day startY endY =
+  length . filter isThatDay . filter isFirstOfMonth $ daysInRange where
+  isThatDay      = (day ==) . Time.dayOfWeek
+  isFirstOfMonth = (1 ==) . getDays . Time.toGregorian
+    where getDays (_, _, d) = d
+  daysInRange = [firstDay .. lastDay]   where -- Time.Day implements Ord, so I can create a range
+    firstDay = read $ show startY ++ "-01-01"
+    lastDay  = read $ show endY ++ "-12-31"
+
+
 main :: IO ()
 main = do
   print $ countDays Sunday 1901 2000
+  print $ countDays' Time.Sunday 1901 2000

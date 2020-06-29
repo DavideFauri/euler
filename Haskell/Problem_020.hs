@@ -1,10 +1,10 @@
 -- Find the sum of the digits in the number 100!
-import Euler (factorial)
+import           Euler                          ( factorial )
+import           Data.Char                      ( digitToInt )
 
 
 sumOfDigits :: Integer -> Integer
-sumOfDigits 0 = 0
-sumOfDigits n = (n `mod` 10) + sumOfDigits (n `div` 10)
+sumOfDigits = sum . map (toInteger . digitToInt) . show
 
 
 main :: IO ()

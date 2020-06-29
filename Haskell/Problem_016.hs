@@ -2,8 +2,7 @@
 
 
 sumOfDigits :: Integer -> Integer
-sumOfDigits 0 = 0
-sumOfDigits n = (n `mod` 10) + sumOfDigits (n `div` 10)
+sumOfDigits = sum . map (toInteger . read . pure) . show -- pure lifts a Char to a [Char], so read can work
 
 
 main :: IO ()
