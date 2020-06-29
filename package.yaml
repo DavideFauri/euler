@@ -1,0 +1,12 @@
+name: Project-Euler
+
+dependencies:
+  - base
+
+library:
+  dependencies:
+    - MemoTrie
+    - sbv
+    - array
+    - containers
+    - time
