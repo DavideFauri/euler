@@ -3,9 +3,9 @@
 These are my attempts at solving the Project Euler challenges using different programming languages.
 I do these challenges occasionally, so there might be some time since my last commit.
 
-DO NOT:
+Ye be warned that:
 
-  * expect to see good code, clean code, well-commented code;
-  * expect me to be efficient: I'm using the challenges to learn different types of coding techniques, so sometimes I'll go for the most complicated answers just to test a new concept;
-  * run my solutions without at least a honest attempt at figuring out the answers yourself - it's part of the fun!
-
+ * there will not be many comments explaining the solutions;
+ * first I write working code, then efficient code, then idiomatic code;
+ * sometimes I over-engineer solutions, just to play with different coding techniques;
+ * please don't run my solutions without at least a honest attempt at solving the problems yourself - it's part of the fun!
