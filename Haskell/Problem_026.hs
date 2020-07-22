@@ -1,5 +1,4 @@
 -- Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.
-import           System.IO
 
 
 inverseWithMaxRecurringUnder :: Integer -> Integer
@@ -31,20 +30,3 @@ _divMod n d = divModHelper n d
 main :: IO ()
 main = do
   print $ inverseWithMaxRecurringUnder 1000
-
-
-
--- def long_div(a, b):
---     assert a >= 0 and b > 0
-
---     while True:
-
---         if rem == 0:  # division is proper
---             return 0
-
---         elif rem in remainders:  # we reached a loop
---             return len(remainders)
-
---         else:  # we continue searching
---             remainders.add(rem)
---             a = rem
