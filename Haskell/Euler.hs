@@ -4,9 +4,11 @@ module Euler
   , primes
   , factorize
   , divisors
+  , binomial
   )
 where
 import           Data.List                      ( nub )
+import           Data.Ratio                     ( (%) )
 
 
 -- canonical implementation of Fibonacci
@@ -52,3 +54,14 @@ divisors n =
   in  nub $ foldl (++)
                   [1]
                   [ [d, n `quot` d] | d <- [2 .. bound], n `mod` d == 0 ]
+
+
+-- n choose k
+-- https://stackoverflow.com/questions/28896626/tail-recursive-binomial-coefficient-function-in-haskell
+binomial :: Integer -> Integer -> Integer
+binomial = loop (toRational 1)
+ where
+  loop :: Rational -> Integer -> Integer -> Integer
+  loop r _ 0 = round r
+  loop _ 0 _ = 0
+  loop r n k = loop (r * (n % k)) (n - 1) (k - 1)
