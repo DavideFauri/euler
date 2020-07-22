@@ -52,6 +52,13 @@ def primes():
             D[x] = p
 
 
+def primes_under(n):
+    for p in primes:
+        if p >= n:
+            raise StopIteration
+        yield p
+
+
 def factorize(n):
     if n == 1:
         return []
