@@ -10,3 +10,5 @@ library:
     - array
     - containers
     - time
+    - split
+    - sorted-list
