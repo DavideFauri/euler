@@ -4,6 +4,7 @@ module Euler
   ( fibonacci
   , factorial
   , primes
+  , isPrime
   , factorize
   , divisors
   , binomial
@@ -52,6 +53,12 @@ primes = 2 : 3 : spin wheel23 5 `minus` composites
     merge' (x : xs) (y : ys) | x < y  = x : merge' xs (y : ys)
                              | x == y = x : merge' xs ys
                              | x > y  = y : merge' (x : xs) ys
+
+
+isPrime :: Integral a => a -> Bool
+isPrime n | n < 0     = False
+          | otherwise = all (\p -> n `mod` p /= 0) (takeWhile (<= limit) primes)
+  where limit = floor . sqrt $ fromIntegral n
 
 
 -- factorization
