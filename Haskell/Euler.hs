@@ -15,15 +15,25 @@ import           Data.Ratio                     ( Ratio
                                                 )
 
 
--- canonical implementation of Fibonacci
+-- fast implementation of Fibonacci as matrix multiplication
+data Matrix a = Matrix a a a
+
+upperRight :: Matrix a -> a
+upperRight (Matrix _ a _) = a
+
+times :: Num a => Matrix a -> Matrix a -> Matrix a
+times (Matrix a b c) (Matrix x y z) = Matrix (a * x + by)
+                                             (a * y + b * z)
+                                             (by + c * z)
+  where by = b * y
+
 fibonacci :: Integral a => [a]
-fibonacci = 0 : 1 : zipWith (+) fibonacci (tail fibonacci)
+fibonacci = 0 : map upperRight (scanl1 times (repeat (Matrix 1 1 0)))
 
 
 -- factorial
 factorial :: Integral a => a -> a
-factorial 1 = 1
-factorial n = n * factorial (n - 1)
+factorial n = product [1 .. n]
 
 
 -- primes generation
