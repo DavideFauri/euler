@@ -1,5 +1,4 @@
 -- Evaluate the sum of all the amicable numbers under 10000
-import           System.IO
 import           Euler                          ( divisors )
 
 
@@ -9,16 +8,15 @@ amicables =
   | a <- [1 ..]
   , let b = sum (divisors a)
   , a == sum (divisors b)
-  , b > a
+  , a < b
   ]
 
 
 sumAmicablesUnder :: Integer -> Integer
-sumAmicablesUnder n = sum $ listOfTuplesToList amicableTuples
+sumAmicablesUnder n = sum . map sumTuple $ amicableTuples
  where
-  amicableTuples = takeWhile (\(_, b) -> b < n) amicables
-  listOfTuplesToList []            = []
-  listOfTuplesToList ((a, b) : xs) = a : b : listOfTuplesToList xs
+  amicableTuples = takeWhile ((< n) . snd) amicables
+  sumTuple (a, b) = a + b
 
 
 main :: IO ()

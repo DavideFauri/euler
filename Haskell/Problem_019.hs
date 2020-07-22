@@ -13,7 +13,7 @@ year = zip [Jan .. Dec] [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 
 leapYear :: [(Month, Int)]
-leapYear = (take 1 year) ++ [(Feb, 29)] ++ (drop 2 year)
+leapYear = take 1 year ++ [(Feb, 29)] ++ drop 2 year
 
 
 isLeap :: Year -> Bool
@@ -33,9 +33,9 @@ week = [Sunday .. Saturday]
 
 
 advanceTime :: DayOfWeek -> Int -> DayOfWeek
-advanceTime today n_days = head $ drop n_days future
+advanceTime today n_days = future !! max 0 n_days
  where
-  future     = restOfWeek ++ (cycle week)
+  future     = restOfWeek ++ cycle week
   restOfWeek = dropWhile (today /=) week
 
 
@@ -55,7 +55,7 @@ countDays day startY endY | startY < epochYear = Nothing
   nDays       = length $ filter (== day) daysInRange
   daysInRange = scanl advanceAMonth dayAtStartOfRange monthsInRange   where
     advanceAMonth d m = advanceTime d (snd m)
-    monthsInRange = concat $ map monthsOfYear [startY .. endY]
+    monthsInRange = concatMap monthsOfYear [startY .. endY]
   dayAtStartOfRange = foldl' advanceAYear epochDOW gapToStart   where
     gapToStart = [epochYear .. startY - 1]
     advanceAYear d y = advanceTime d $ daysInYear y

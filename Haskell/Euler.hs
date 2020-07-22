@@ -22,7 +22,7 @@ factorial n = n * factorial (n - 1)
 
 -- primes generation
 primes :: [Integer]
-primes = 2 : 3 : ((spin wheel23 5) `minus` composites)
+primes = 2 : 3 : spin wheel23 5 `minus` composites
  where
   spin (x : xs) n = n : spin xs (n + x)
   wheel23    = 2 : 4 : wheel23

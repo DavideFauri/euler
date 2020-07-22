@@ -16,7 +16,7 @@ makeStreaks :: Int -> [a] -> [[a]]
 makeStreaks len = filter isActuallyLen . map (take len) . sequentialDrop
  where
   isActuallyLen xs = length xs == len
-  sequentialDrop xs = [ drop n xs | n <- [0 .. (length xs) - len] ]
+  sequentialDrop xs = [ drop n xs | n <- [0 .. length xs - len] ]
 
 
 main :: IO ()

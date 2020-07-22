@@ -46,7 +46,7 @@ filledGrid size@(xSize, ySize) = foldl'
 
 
 numRoutes' :: Point -> Integer
-numRoutes' p = (filledGrid p) M.! p
+numRoutes' p = filledGrid p M.! p
 
 
 main :: IO ()

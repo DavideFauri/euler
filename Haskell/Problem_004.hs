@@ -5,17 +5,18 @@ largestPalindrome :: Integer -> Integer
 largestPalindrome n =
   head
     $  filter (testIfFactorsHaveLength n)
-    $  (generatePalindromesOfLength $ 2 * n)
-    ++ (generatePalindromesOfLength $ 2 * n - 1)
+    $  generatePalindromesOfLength (2 * n)
+    ++ generatePalindromesOfLength (2 * n - 1)
 
 
 testIfFactorsHaveLength :: Integer -> Integer -> Bool
-testIfFactorsHaveLength length number = any (`hasLength` length)
-  $ map (number `div`) possibleDivisors
+testIfFactorsHaveLength length number = any
+  ((`hasLength` length) . (number `div`))
+  possibleDivisors
  where
   n `hasLength` l = 10 ^ (l - 1) <= abs n && abs n < 10 ^ l
   possibleDivisors =
-    [ divisor | divisor <- (numbersOfLength length), number `mod` divisor == 0 ]
+    [ divisor | divisor <- numbersOfLength length, number `mod` divisor == 0 ]
 
 
 numbersOfLength :: Integer -> [Integer]
@@ -30,8 +31,8 @@ generatePalindromesOfLength length
   | even length = map palyndromizeEven $ bases (length `div` 2)
   | otherwise   = map palyndromizeOdd $ bases (length `div` 2 + 1)
  where
-  palyndromizeEven n = read $ (show n) ++ (reverse $ show n)
-  palyndromizeOdd n = read $ (show n) ++ (tail $ reverse $ show n)
+  palyndromizeEven n = read $ show n ++ reverse (show n)
+  palyndromizeOdd n = read $ show n ++ tail (reverse . show $ n)
   bases digits = [maxBase, maxBase - 1 .. minBase] -- 999 ... 100
    where
     maxBase = 10 ^ digits - 1

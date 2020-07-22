@@ -1,6 +1,4 @@
-{-# LANGUAGE BangPatterns #-}
 -- Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
-import           System.IO
 import           Euler                          ( divisors )
 import qualified Data.Set                      as Set -- for faster lookups
 
@@ -29,4 +27,4 @@ sumNonSum2Abundants = sum nonSum2Abundants
 
 main :: IO ()
 main = do
-  print $ sumNonSum2Abundants
+  print sumNonSum2Abundants

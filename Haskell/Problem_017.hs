@@ -60,7 +60,7 @@ num2strBelow10e3 n = str_hundreds ++ conjunction ++ str_remainder where
 num2strBelow10e6 :: Int -> String
 num2strBelow10e6 n = str_thousands ++ str_remainder where
   str_thousands = if thousands > 0
-    then (num2strBelow10e3 thousands) ++ (wordMap Map.! (10 ^ 3))
+    then num2strBelow10e3 thousands ++ (wordMap Map.! (10 ^ 3))
     else ""
   str_remainder = if remainder > 0 then num2strBelow10e3 remainder else ""
   (thousands, remainder) = n `divMod` (10 ^ 3)
@@ -69,7 +69,7 @@ num2strBelow10e6 n = str_thousands ++ str_remainder where
 num2strBelow10e9 :: Int -> String
 num2strBelow10e9 n = str_millions ++ str_remainder where
   str_millions = if millions > 0
-    then (num2strBelow10e3 millions) ++ (wordMap Map.! (10 ^ 6))
+    then num2strBelow10e3 millions ++ (wordMap Map.! (10 ^ 6))
     else ""
   str_remainder = if remainder > 0 then num2strBelow10e6 remainder else ""
   (millions, remainder) = n `divMod` (10 ^ 6)

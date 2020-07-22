@@ -25,7 +25,7 @@ tripletsWithSum n =
 
 
 productTriplets :: [(Integer, Integer, Integer)] -> [Integer]
-productTriplets xs = map (\(a, b, c) -> a * b * c) xs
+productTriplets = map (\(a, b, c) -> a * b * c)
 
 
 main :: IO ()

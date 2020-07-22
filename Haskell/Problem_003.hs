@@ -11,4 +11,4 @@ factors n = factor : factors (n `div` factor)
 
 main :: IO ()
 main = do
-  print $ last $ factors $ 600851475143
+  print $ last $ factors 600851475143
